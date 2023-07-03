@@ -5,7 +5,7 @@ import 'dotenv/config';
 
 import { User } from './utils/types';
 import { isInstanceUser } from './utils/isInstanceUser';
-import { parseResponse } from './utils/parseResponse';
+import { getUsers } from './utils/getUsers';
 import { getSelectedUser } from './utils/getUser';
 import { dataBase } from './dataBase';
 
@@ -37,7 +37,7 @@ const server = http.createServer((request: http.IncomingMessage, response: http.
       });
     } else if (method === 'GET') {
       response.statusCode = 200;
-      const users = parseResponse(dataBase);
+      const users = getUsers(dataBase);
       response.end(JSON.stringify(users));
     }
   } else if (path!.includes('/api/users') && idUser) {
@@ -86,7 +86,7 @@ const server = http.createServer((request: http.IncomingMessage, response: http.
   }
 });
 const host = 'localhost';
-const port = process.env.DB_PORT;
+const port = process.env.PORT;
 
 server.listen(port, () => {
   console.log(`Server running at http://${host}:${port}`);
