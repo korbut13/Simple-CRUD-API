@@ -11,7 +11,6 @@ export const controller = (method: string, userId: string | null | undefined, re
   try {
     if (method === 'GET') {
       if (userId !== null) {
-        console.log(111);
         makeGetRequestWithId(userId!, response);
       } else {
         makeGetRequest(response);
