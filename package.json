@@ -1,0 +1,17 @@
+{
+  "name": "simple-crud-api",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:prod": "tsc && node dist/index.js",
+    "start:dev": "ts-node-dev src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  }
+}
