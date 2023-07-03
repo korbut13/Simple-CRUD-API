@@ -1,6 +1,7 @@
 import http from 'node:http';
 import url from 'url';
 import { v4 } from 'uuid';
+import 'dotenv/config';
 
 import { User } from './utils/types';
 import { isInstanceUser } from './utils/isInstanceUser';
@@ -85,8 +86,8 @@ const server = http.createServer((request: http.IncomingMessage, response: http.
   }
 });
 const host = 'localhost';
-const port = 3000;
+const port = process.env.DB_PORT;
 
-server.listen(port, host, () => {
+server.listen(port, () => {
   console.log(`Server running at http://${host}:${port}`);
 });
