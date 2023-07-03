@@ -4,6 +4,8 @@ import { v4 } from 'uuid';
 
 import { User } from './utils/types';
 import { isInstanceUser } from './utils/isInstanceUser';
+import { parseResponse } from './utils/parseResponse';
+import { getSelectedUser } from './utils/getUser';
 import { dataBase } from './dataBase';
 
 const server = http.createServer((request: http.IncomingMessage, response: http.ServerResponse) => {
@@ -34,14 +36,14 @@ const server = http.createServer((request: http.IncomingMessage, response: http.
       });
     } else if (method === 'GET') {
       response.statusCode = 200;
-      const objResp = Object.fromEntries(Array.from(dataBase));
-      response.end(JSON.stringify(objResp));
+      const users = parseResponse(dataBase);
+      response.end(JSON.stringify(users));
     }
   } else if (path!.includes('/api/users') && idUser) {
     if (method === 'GET') {
       if (dataBase.has(idUser)) {
         response.statusCode = 200;
-        response.end(JSON.stringify(dataBase.get(idUser)));
+        response.end(JSON.stringify(getSelectedUser(dataBase, idUser)));
       } else {
         response.statusCode = 400;
         response.end('The user with this id was not found');
